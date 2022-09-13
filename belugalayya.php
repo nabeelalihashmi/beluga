@@ -11,6 +11,8 @@ while (($line = fgets($h)) !== false) {
     $diff_b = array_diff(str_split($data[1]), str_split($data[0]));
     $pos_in_first = [];
     $pos_in_second = [];
+    $datax = [];
+    // echo '<h1> According to First </h1>';
     foreach($diff_a as $ltr) {
         echo $line . "\r\n";
        
@@ -19,6 +21,8 @@ while (($line = fgets($h)) !== false) {
         echo "[First]: ". $ltr . ' at position ' . $pos ."\r\n";
     }
     $res_a[$ltr] = '[' . implode(',', $pos_in_first) . ']';
+    $datax[$line]['first'][] = $res_a[$ltr];
+    // echo '<h1> According to Second </h1>';
     foreach($diff_b as $ltr) {
         echo $line . "\r\n";
         $pos = strpos($data[1], $ltr);
@@ -26,10 +30,12 @@ while (($line = fgets($h)) !== false) {
         echo "[Second]: ". $ltr . ' at position' . $pos ."\r\n";
     }
     $res_b[$ltr] = '[' . implode(',', $pos_in_second) . ']';
+    $datax[$line]['second'][] = $res_b[$ltr];
 }
 
+var_dump($datax);
 var_dump($res_a);
 var_dump($res_b);
 
-// echo "Difference in first: " . implode(',', $res_a) . "\r\n";
-// echo "Differences in second:" . implode(',', $res_b);
+echo "Difference in first: " . implode(',', $res_a) . "\r\n";
+echo "Differences in second:" . implode(',', $res_b);
